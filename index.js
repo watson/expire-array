@@ -9,10 +9,10 @@ var ExpireArray = module.exports = function (timeout) {
   this._db = []
 }
 
-ExpireArray.prototype._scheduleGC = function (wait) {
+ExpireArray.prototype._scheduleGC = function () {
   if (this._nextGC) return
-  wait = wait === undefined ? this._timeout : wait
-  this._nextGC = setTimeout(this._gc.bind(this), wait)
+  var ts = this._db.length ? this._db[0][0] - Date.now() + delay : this._timeout
+  this._nextGC = setTimeout(this._gc.bind(this), ts)
   if (this._nextGC.unref) this._nextGC.unref()
 }
 
@@ -22,7 +22,7 @@ ExpireArray.prototype._gc = function () {
     this._db.shift()
   }
   this._nextGC = null
-  if (this._db.length) this._scheduleGC(this._db[0][0] - Date.now() + delay)
+  this._scheduleGC()
 }
 
 ExpireArray.prototype.push = function (elm) {
