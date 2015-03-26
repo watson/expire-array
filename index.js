@@ -25,9 +25,8 @@ ExpireArray.prototype._gc = function () {
 }
 
 ExpireArray.prototype.push = function (elm) {
-  var ts = Date.now() + this._timeout
   if (!this._db.length) this._scheduleGC()
-  this._db.push([ts, elm])
+  this._db.push([Date.now() + this._timeout, elm])
 }
 
 ExpireArray.prototype.all = function () {
