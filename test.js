@@ -14,13 +14,13 @@ test('invalid timeout', function (t) {
 })
 
 test('empty', function (t) {
-  var arr = ExpireArray(100)
+  var arr = ExpireArray(50)
   t.deepEqual(arr.all(), [])
   t.end()
 })
 
 test('full', function (t) {
-  var arr = ExpireArray(100)
+  var arr = ExpireArray(50)
   arr.push(1)
   arr.push(2)
   arr.push(3)
@@ -46,7 +46,7 @@ test('expire', function (t) {
 })
 
 test('clone', function (t) {
-  var arr = ExpireArray(100)
+  var arr = ExpireArray(50)
   arr.push(1)
   arr.push(2)
   var clone = arr.all()
