@@ -59,6 +59,14 @@ var arr = ExpireArray(1000 * 60) // one minute
 
 Add an element to the end of the array.
 
+#### `arr.pop()`
+
+Removes the last element from an array and returns that element.
+
+#### `arr.shift()`
+
+Removes the first element from an array and returns that element.
+
 #### `arr.all()`
 
 Returns all the elements in the array that have not expired. The

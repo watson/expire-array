@@ -30,6 +30,25 @@ ExpireArray.prototype.push = function (elm) {
   this._db.push([Date.now() + this._timeout, elm])
 }
 
+ExpireArray.prototype.pop = function () {
+  var elm = this._db.pop()
+  if (!this._db.length && this._nextGC) {
+    clearTimeout(this._nextGC)
+    this._nextGC = null
+  }
+  return elm && elm[1]
+}
+
+ExpireArray.prototype.shift = function () {
+  var elm = this._db.shift()
+  if (this._nextGC) {
+    clearTimeout(this._nextGC)
+    this._nextGC = null
+  }
+  this._scheduleGC()
+  return elm && elm[1]
+}
+
 ExpireArray.prototype.all = function () {
   return this._db.map(function (elm) {
     return elm[1]
