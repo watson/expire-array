@@ -13,6 +13,7 @@ ExpireArray.prototype._scheduleGC = function (wait) {
   if (this._nextGC) return
   wait = wait === undefined ? this._timeout : wait
   this._nextGC = setTimeout(this._gc.bind(this), wait)
+  if (this._nextGC.unref) this._nextGC.unref()
 }
 
 ExpireArray.prototype._gc = function () {
