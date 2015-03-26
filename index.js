@@ -59,12 +59,6 @@ ExpireArray.prototype.all = function () {
  * forwarded functions
  */
 
-ExpireArray.prototype.every = function (fn, self) {
-  return this._db.every(function (elm, index) {
-    return fn.call(self, elm[1], index)
-  })
-}
-
 ExpireArray.prototype.forEach = function (fn, self) {
   this._db.forEach(function (elm, index) {
     fn.call(self, elm[1], index)
@@ -73,6 +67,12 @@ ExpireArray.prototype.forEach = function (fn, self) {
 
 ExpireArray.prototype.map = function (fn, self) {
   return this._db.map(function (elm, index) {
+    return fn.call(self, elm[1], index)
+  })
+}
+
+ExpireArray.prototype.every = function (fn, self) {
+  return this._db.every(function (elm, index) {
     return fn.call(self, elm[1], index)
   })
 }
