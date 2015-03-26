@@ -1,6 +1,8 @@
 # expire-array
 
 An array-like structure that removes each element after a given timeout.
+Or think of it as a rolling window on top of an array which only
+contains the most recent elements.
 
 [![Build status](https://travis-ci.org/watson/expire-array.svg?branch=master)](https://travis-ci.org/watson/expire-array)
 
